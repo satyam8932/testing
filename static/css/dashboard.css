@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: 20px; */
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.card .cta {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #c0392b;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card .cta:hover {
+  background-color: #e74c3c;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .card {
+    margin: 20px 0;
+  }
+}

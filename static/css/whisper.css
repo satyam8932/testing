@@ -1,0 +1,23 @@
+.sticky-card {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    /* background-color: rgb(243, 212, 186); */
+    padding: 10px;
+    border-radius: 100px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transform: rotate(0deg);
+    z-index: 1;
+}
+
+.sticky-card p {
+    margin: 0;
+    font-size: 16px;
+    /* font-family: Arial, sans-serif; */
+    line-height: 1.5;
+}
+
+.sticky-card:hover{
+    transform:scale(1.1);
+    transition: 100ms ease-in-out;
+}
