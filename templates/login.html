@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Magic AI Box</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    body {
+      background-color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      width: 400px;
+      max-width: 90%;
+    }
+    h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"], input[type="submit"] {
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1) inset;
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 20px;
+      padding: 15px;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      background-color: #fff;
+      box-shadow: 0 0 5px #3d9eff;
+    }
+    input[type="submit"] {
+      background-color: #3d9eff;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 15px;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+    input[type="submit"]:hover {
+      background-color: #1a8cff;
+    }
+    .forgot-password {
+      color: #666;
+      text-align: center;
+      text-decoration: underline;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+        width: 60%;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      input[type="text"], input[type="password"], input[type="submit"] {
+        font-size: 14px;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      input[type="submit"] {
+        margin-top: 10px;
+        padding: 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Login</h2>
+      <form method="POST">
+        <input type="text" name="email" placeholder="Enter Your Email" style="height: 50px;">
+        <input type="password" name="login_code" placeholder="Enter Login Code" style="height: 50px;">
+        <input type="submit" value="Login" style="height: 50px;">
+        <p class="error-message" id="error-message">{{ data }}</p>
+      </form>
+      <a href="https://www.magicaibox.site/" target="_blank" class="forgot-password">Not Registered! Click Here</p>
+    </div>
+  </div>
+</body>
+</html>

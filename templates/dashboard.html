@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="card">
+			<h2>Welcome {{data['name']}}</h2>
+			<p>You can use AI models here.</p>
+			<a href="#" class="cta">View Models</a>
+		</div>
+		<div class="card">
+			<h2>Whisper AI</h2>
+			<p>Used to transcribe a given audio.</p>
+			<a href="/whisper" class="cta">View Models</a>
+		</div>
+		<div class="card">
+			<h2>Subscription Details</h2>
+			<p>Your Subscription will end on {{data['subscription_end']}}</p>
+			<a href="https://magicaibox.site" target="_blank" class="cta">Renew</a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="card">
+			<h2>Resource Usage</h2>
+			<hr>
+			<p>Words (Used/Total) : {{data['words_count']}}/{{data['words_total']}}</p>
+			<hr>
+			<p>Images (Used/Total) : {{data['images_count']}}/{{data['images_total']}}</p>
+			<hr>
+			<p>Minutes (Used/Total) : {{data['minutes_count']}}/{{data['minutes_total']}}</p>
+		</div>
+	</div>
+{% endblock %}

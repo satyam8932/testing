@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+
+{% block title %}Whisper AI{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/whisper.css') }}">
+<div class="sticky-card btn-success">
+    <!-- <h3>Minutes Usage</h3> -->
+    <p>Minutes Used</p>
+    <p style="text-align:center;">{{data[3]}} / {{data[4]}}</p>
+</div>
+<div class="sticky-card btn-warning">
+    <!-- <h3>Minutes Usage</h3> -->
+    <!-- <p>Minutes Used</p> -->
+    <p style="text-align:center;">{{data[5]}}</p>
+</div>
+<div class="container">
+    <div class="card">
+        <h1>Speech Recognizer</h1>
+        <hr>
+        <p> Welcome to the automatic <i>Speech Recognition</i> application. It allows transcription in multiple
+            languages
+            (currently 99) as well as automatic translation from those <b> languages</b> to English. Click the
+            microphone to
+            record the audio recording, the color of the microphone will turn red. Click the microphone again to stop
+            recording and the "Transcribe Audio" button to convert the audio to text and translate it into English. The
+            first time you start the tool, it may take about 1 minute for the tool to load completely. The transcription
+            of the audio can take anywhere from 10 to 60 seconds, depending on the length of the recording. Try to limit
+            the recording to about 30 seconds to avoid the transcription taking too long. If the output or translation
+            is not good, you can click the "Transcribe Audio" button again to run the process again.
+        </p>
+    </div>
+</div>
+<form action="/whisper-results" method="POST" enctype="multipart/form-data">
+    <div class="container" id="data_send_by_user">
+        <div class="card">
+            <div class="form-group">
+                <label for="audioFile"><b>Select Audio File:</b></label>
+                <input type="file" class="form-control-file" id="audioFile" name="audioFile" disabled>
+            </div>
+        </div>
+        <h4>or</h4>
+        <div class="card">
+            <label for="audioRecord"><b>Record Audio:</b></label>
+            <button type="button" id="startButton" class="btn btn-secondary" disabled style="margin: 5px; cursor: not-allowed;">Start Recording</button>
+            <button type="button" id="stopButton"  class="btn btn-secondary" disabled style="margin: 5px; cursor: not-allowed;">Stop Recording</button>
+            <br>
+            <audio id="audio-player" controls>
+                <source src="" type="audio/mpeg/wav">
+                Your browser does not support the audio tag.
+            </audio>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <!-- <input type="text" placeholder="Name of Language or Leave it for Language Detection" name="language"> -->
+            <select class="form-select" aria-label="Default select example" style="width: 100%;">
+                <option selected>Select Language or Leave it for Automatic Detection</option>
+                <option value="af">af</option>
+                <option value="am">am</option>
+                <option value="ar">ar</option>
+                <option value="as">as</option>
+                <option value="az">az</option>
+                <option value="ba">ba</option>
+                <option value="be">be</option>
+                <option value="bg">bg</option>
+                <option value="bn">bn</option>
+                <option value="bo">bo</option>
+                <option value="br">br</option>
+                <option value="bs">bs</option>
+                <option value="ca">ca</option>
+                <option value="cs">cs</option>
+                <option value="cy">cy</option>
+                <option value="da">da</option>
+                <option value="de">de</option>
+                <option value="el">el</option>
+                <option value="en">en</option>
+                <option value="es">es</option>
+                <option value="et">et</option>
+                <option value="eu">eu</option>
+                <option value="fa">fa</option>
+                <option value="fi">fi</option>
+                <option value="fo">fo</option>
+                <option value="fr">fr</option>
+                <option value="gl">gl</option>
+                <option value="gu">gu</option>
+                <option value="ha">ha</option>
+                <option value="haw">haw</option>
+                <option value="he">he</option>
+                <option value="hi">hi</option>
+                <option value="hr">hr</option>
+                <option value="ht">ht</option>
+                <option value="hu">hu</option>
+                <option value="hy">hy</option>
+                <option value="id">id</option>
+                <option value="is">is</option>
+                <option value="it">it</option>
+                <option value="ja">ja</option>
+                <option value="jw">jw</option>
+                <option value="ka">ka</option>
+                <option value="kk">kk</option>
+                <option value="km">km</option>
+                <option value="kn">kn</option>
+                <option value="ko">ko</option>
+                <option value="la">la</option>
+                <option value="lb">lb</option>
+                <option value="ln">ln</option>
+                <option value="lo">lo</option>
+                <option value="lt">lt</option>
+                <option value="lv">lv</option>
+                <option value="mg">mg</option>
+                <option value="mi">mi</option>
+                <option value="mk">mk</option>
+                <option value="ml">ml</option>
+                <option value="mn">mn</option>
+                <option value="mr">mr</option>
+                <option value="ms">ms</option>
+                <option value="mt">mt</option>
+                <option value="my">my</option>
+                <option value="ne">ne</option>
+                <option value="nl">nl</option>
+                <option value="nn">nn</option>
+                <option value="no">no</option>
+                <option value="oc">oc</option>
+                <option value="pa">pa</option>
+                <option value="pl">pl</option>
+                <option value="ps">ps</option>
+                <option value="pt">pt</option>
+                <option value="ro">ro</option>
+                <option value="ru">ru</option>
+                <option value="sa">sa</option>
+                <option value="sd">sd</option>
+                <option value="si">si</option>
+                <option value="sk">sk</option>
+                <option value="sl">sl</option>
+                <option value="sn">sn</option>
+                <option value="so">so</option>
+                <option value="sq">sq</option>
+                <option value="sr">sr</option>
+                <option value="su">su</option>
+                <option value="sv">sv</option>
+                <option value="sw">sw</option>
+                <option value="ta">ta</option>
+                <option value="te">te</option>
+                <option value="tg">tg</option>
+                <option value="th">th</option>
+                <option value="tk">tk</option>
+                <option value="tl">tl</option>
+                <option value="tr">tr</option>
+                <option value="tt">tt</option>
+                <option value="uk">uk</option>
+                <option value="ur">ur</option>
+                <option value="uz">uz</option>
+                <option value="vi">vi</option>
+                <option value="yi">yi</option>
+                <option value="yo">yo</option>
+                <option value="zh">zh</option>
+                <option value="Afrikaans">Afrikaans</option>
+                <option value="Albanian">Albanian</option>
+                <option value="Amharic">Amharic</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Armenian">Armenian</option>
+                <option value="Assamese">Assamese</option>
+                <option value="Azerbaijani">Azerbaijani</option>
+                <option value="Bashkir">Bashkir</option>
+                <option value="Basque">Basque</option>
+                <option value="Belarusian">Belarusian</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Bosnian">Bosnian</option>
+                <option value="Breton">Breton</option>
+                <option value="Bulgarian">Bulgarian</option>
+                <option value="Burmese">Burmese</option>
+                <option value="Castilian">Castilian</option>
+                <option value="Catalan">Catalan</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Croatian">Croatian</option>
+                <option value="Czech">Czech</option>
+                <option value="Danish">Danish</option>
+                <option value="Dutch">Dutch</option>
+                <option value="English">English</option>
+                <option value="Estonian">Estonian</option>
+                <option value="Faroese">Faroese</option>
+                <option value="Finnish">Finnish</option>
+                <option value="Flemish">Flemish</option>
+                <option value="French">French</option>
+                <option value="Galician">Galician</option>
+                <option value="Georgian">Georgian</option>
+                <option value="German">German</option>
+                <option value="Greek">Greek</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Haitian">Haitian</option>
+                <option value="Haitian">Haitian</option>
+                <option value="Creole">Creole</option>
+                <option value="Hausa">Hausa</option>
+                <option value="Hawaiian">Hawaiian</option>
+                <option value="Hebrew">Hebrew</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hungarian">Hungarian</option>
+                <option value="Icelandic">Icelandic</option>
+                <option value="Indonesian">Indonesian</option>
+                <option value="Italian">Italian</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Javanese">Javanese</option>
+                <option value="Kannada">Kannada</option>
+                <option value="Kazakh">Kazakh</option>
+                <option value="Khmer">Khmer</option>
+                <option value="Korean">Korean</option>
+                <option value="Lao">Lao</option>
+                <option value="Latin">Latin</option>
+                <option value="Latvian">Latvian</option>
+                <option value="Letzeburgesch">Letzeburgesch</option>
+                <option value="Lingala">Lingala</option>
+                <option value="Lithuanian">Lithuanian</option>
+                <option value="Luxembourgish">Luxembourgish</option>
+                <option value="Macedonian">Macedonian</option>
+                <option value="Malagasy">Malagasy</option>
+                <option value="Malay">Malay</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Maltese">Maltese</option>
+                <option value="Maori">Maori</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Moldavian">Moldavian</option>
+                <option value="Moldovan">Moldovan</option>
+                <option value="Mongolian">Mongolian</option>
+                <option value="Myanmar">Myanmar</option>
+                <option value="Nepali">Nepali</option>
+                <option value="Norwegian">Norwegian</option>
+                <option value="Nynorsk">Nynorsk</option>
+                <option value="Occitan">Occitan</option>
+                <option value="Panjabi">Panjabi</option>
+                <option value="Pashto">Pashto</option>
+                <option value="Persian">Persian</option>
+                <option value="Polish">Polish</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Pushto">Pushto</option>
+                <option value="Romanian">Romanian</option>
+                <option value="Russian">Russian</option>
+                <option value="Sanskrit">Sanskrit</option>
+                <option value="Serbian">Serbian</option>
+                <option value="Shona">Shona</option>
+                <option value="Sindhi">Sindhi</option>
+                <option value="Sinhala">Sinhala</option>
+                <option value="Sinhalese">Sinhalese</option>
+                <option value="Slovak">Slovak</option>
+                <option value="Slovenian">Slovenian</option>
+                <option value="Somali">Somali</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Sundanese">Sundanese</option>
+                <option value="Swahili">Swahili</option>
+                <option value="Swedish">Swedish</option>
+                <option value="Tagalog">Tagalog</option>
+                <option value="Tajik">Tajik</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Tatar">Tatar</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Thai">Thai</option>
+                <option value="Tibetan">Tibetan</option>
+                <option value="Turkish">Turkish</option>
+                <option value="Turkmen">Turkmen</option>
+                <option value="Ukrainian">Ukrainian</option>
+                <option value="Urdu">Urdu</option>
+                <option value="Uzbek">Uzbek</option>
+                <option value="Valencian">Valencian</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Welsh">Welsh</option>
+                <option value="Yiddish">Yiddish</option>
+                <option value="Yoruba">Yoruba</option>
+              </select>
+            <br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="to_translate">
+                <label class="form-check-label" for="inlineCheckbox1">Translate</label>
+            </div>
+        </div>
+        <div class="card">
+            <a href="/whisper" class="btn btn-primary">Use Again</a>
+        </div>
+    </div>
+</form>
+
+<form method="get">
+    <div class="container">
+        <div class="card">
+            <h2>Ouptut</h2>
+            <p class="detected_language"><b>Detected Language : {{data[2]}}</b></p>
+            <p class="output" name="output">{{data[0]}}</p>
+        </div>
+        <div class="card">
+            <h2>Translation</h2>
+            <p class="detected_language"><b>English :</b></p>
+            <p class="translate" name="translate">{{data[1]}}</p>
+        </div>
+    </div>    
+</form>
+<script>
+
+</script>
+<script src="{{ url_for('static', filename='js/whisper.js') }}"></script>
+{% endblock %}

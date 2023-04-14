@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+<!-- Whisper Settings -->
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+            <div class="card">
+                <h2 class="text-center mb-4">Whisper AI Settings</h2>
+                <form class="form-card" action="admin-success" method="POST">
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">API Key<span class="text-danger"> *</span></label> <input type="text" id="API_Key" name="API_Key" value="{{data[0]}}"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Transcription<span class="text-danger"> *</span></label> <input type="text" id="Transcription" name="Transcription" value="{{data[1]}}"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Temperature<span class="text-danger"> *</span></label> <input type="text" id="Temperature" name="Temperature" value="{{data[2]}}"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Patience<span class="text-danger"> *</span></label> <input type="text" id="Patience" name="Patience" value="{{data[3]}}"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Suppress Tokens<span class="text-danger"> *</span></label> <input type="text" id="Suppress_Tokens" name="Suppress_Tokens" value="{{data[4]}}"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Temperature Increment on Fallback<span class="text-danger"> *</span></label> <input type="text" id="Temperature_increment" name="Temperature_increment" value="{{data[5]}}"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Compression Ratio Threshold<span class="text-danger"> *</span></label> <input type="text" id="Compression" name="Compression" value="{{data[6]}}"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Logprob Threshold<span class="text-danger"> *</span></label> <input type="text" id="Logprob" name="Logprob" value="{{data[7]}}" > </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">No Speech Threshold<span class="text-danger"> *</span></label> <input type="text" id="Speech" name="Speech" value="{{data[8]}}"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Model<span class="text-danger"> *</span></label> <input type="text" id="Model" name="Model" value="{{data[9]}}"> </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="form-group col-sm-6"> <input type="submit" class="btn btn-primary text-center"></input> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
